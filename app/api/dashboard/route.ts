@@ -11,7 +11,7 @@ async function getDb() {
   });
 }
 
-export async function GET(req: Request) {
+export async function GET(_req: Request) {
   try {
     const db = await getDb();
 

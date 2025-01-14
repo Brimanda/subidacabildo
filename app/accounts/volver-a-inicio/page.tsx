@@ -8,8 +8,8 @@ const MySwal = withReactContent(Swal);
 
 export default function PasswordRecovery() {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
+  const [setError] = useState('');
+  const [setMessage] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -37,7 +37,6 @@ export default function PasswordRecovery() {
         return;
       }
 
-      const data = await response.json();
       setMessage('Te hemos enviado un correo con un enlace para recuperar tu contraseña.');
       
       MySwal.fire({

@@ -13,7 +13,7 @@ async function getDb() {
   });
 }
 
-export async function GET(req: NextApiRequest) {
+export async function GET(_req: NextApiRequest) {
   try {
     const db = await getDb();
     const activities = await db.all(`

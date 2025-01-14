@@ -11,7 +11,6 @@ import {
   AlertCircle,
   CheckCircle,
 } from 'lucide-react';
-import ActivitiesComp from '@/components/Dashboard';
 
 const MySwal = withReactContent(Swal);
 
@@ -41,7 +40,6 @@ const Dashboard = () => {
     created_at: string;
   }
 
-  const [activitiesData, setActivitiesData] = useState<Activity[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -93,30 +91,6 @@ const Dashboard = () => {
 
     validateSessionAndFetchData();
   }, [router]);
-
-  const handleLogout = async () => {
-    const result = await MySwal.fire({
-      title: '¿Cerrar sesión?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'No',
-    });
-
-    if (result.isConfirmed) {
-      try {
-        const res = await fetch('/api/logout', { method: 'POST' });
-        if (res.ok) {
-          localStorage.removeItem('sessionToken');
-          router.push('/accounts/inicio-sesion');
-        } else {
-          MySwal.fire('Error', 'No se pudo cerrar la sesión', 'error');
-        }
-      } catch (error) {
-        console.error('Error al cerrar sesión:', error);
-      }
-    }
-  };
 
   if (loading) {
     return (

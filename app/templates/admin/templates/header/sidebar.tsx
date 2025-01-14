@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Home, Calendar, Layout, Users, LogOut, Tickets} from 'lucide-react';
+import { Home, Users, LogOut, Tickets } from 'lucide-react'; // Elimina Calendar y Layout
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -45,8 +45,6 @@ export default function SidebarComponent() {
     });
   
     if (confirmation.isConfirmed) {
-      const token = localStorage.getItem('sessionToken');
-  
       if (!token) {
         MySwal.fire({
           title: 'Error',
@@ -126,6 +124,7 @@ export default function SidebarComponent() {
     </aside>
   );
 }
+
 import { ReactNode, FC } from 'react';
 
 interface NavItemProps {
@@ -134,10 +133,9 @@ interface NavItemProps {
   label: string;
   isOpen: boolean;
   isActive: boolean;
-  onClick?: () => void;
 }
 
-const NavItem: FC<NavItemProps> = ({ href, icon, label, isOpen, isActive, onClick }) => {
+const NavItem: FC<NavItemProps> = ({ href, icon, label, isOpen, isActive }) => {
   return (
     <Link
       href={href}
@@ -152,6 +150,3 @@ const NavItem: FC<NavItemProps> = ({ href, icon, label, isOpen, isActive, onClic
     </Link>
   );
 }
-
-
-

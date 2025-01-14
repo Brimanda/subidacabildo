@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Home, Calendar, Layout, Users, LogOut, Tickets, Ticket } from 'lucide-react';
+import { Home, Layout, Users, LogOut, Ticket } from 'lucide-react'; // Elimina Calendar y Tickets
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -64,7 +64,6 @@ export default function SidebarComponent() {
       }
     }
   };
-
 
   return (
     <aside

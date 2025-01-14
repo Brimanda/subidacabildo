@@ -6,8 +6,8 @@ import Form from "./templates/user/formulario/page";
 import Footer from './templates/user/footer/page';
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
-  const [isUser, setIsUser] = useState(false);
+  const [setLoading] = useState(true);
+  const [setIsUser] = useState(false);
   const router = useRouter();
 
   useEffect(() => {

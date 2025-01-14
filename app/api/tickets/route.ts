@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import sqlite3 from 'sqlite3';
 import path from 'path';
-import bcrypt from 'bcrypt';
 
 const dbFilePath = path.join(process.cwd(), 'data', 'municipio.db'); 
 const db = new sqlite3.Database(dbFilePath);

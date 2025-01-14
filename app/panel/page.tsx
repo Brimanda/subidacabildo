@@ -7,7 +7,7 @@ import Header from '../templates/user/header/page';
 
 
 export default function Home() {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [setAuthenticated] = useState(false);
   const router = useRouter();
 
   useEffect(() => {

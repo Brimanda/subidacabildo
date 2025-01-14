@@ -9,7 +9,6 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
     const [id, setId] = useState<string | null>(null);
     const [user, setUser] = useState<{ name: string; email: string; role: string; password?: string } | null>(null);
     const [error, setError] = useState('');
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
         const resolveParams = async () => {
@@ -29,8 +28,6 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
                 if (!response.ok) throw new Error('Error al obtener los detalles del usuario');
                 const data = await response.json();
                 setUser(data);
-            } catch (err) {
-                setError('Error al cargar los datos del usuario');
             }
         };
 
@@ -49,8 +46,6 @@ export default function EditUserPage({ params }: { params: Promise<{ id: string 
 
             if (!response.ok) throw new Error('Error al actualizar el usuario');
             router.push('/administracion/users');
-        } catch (err) {
-            setError('Error al actualizar el usuario');
         }
     };
 

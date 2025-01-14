@@ -9,10 +9,6 @@ export default function Dashboard() {
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-  const handleSidebarToggle = (isOpen: boolean) => {
-    setSidebarOpen(isOpen);
-  };
-
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />

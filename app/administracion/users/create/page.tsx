@@ -84,10 +84,6 @@ export default function CreateUserPage() {
         }
     }
 
-    const handleSidebarToggle = (isOpen: boolean) => {
-        setSidebarOpen(isOpen)
-    }
-
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible)
     }
