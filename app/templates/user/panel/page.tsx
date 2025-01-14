@@ -1,107 +1,75 @@
 'use client'
 
-import { ChevronDownIcon, ChevronUpIcon, SearchIcon } from 'lucide-react'
-import React, { useState, useEffect } from 'react'
+import { ChevronDownIcon, ChevronUpIcon, SearchIcon } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 type Ticket = {
-  n_ticket: string
-  name: string
-  area: string
-  problema: string
-  description: string
-  status: 'Abierto' | 'Cerrado'
-  created_at: string
-  user_id: number
-  resolution?: string
-  hour_resolution?: string
-}
+  n_ticket: string;
+  name: string;
+  area: string;
+  problema: string;
+  description: string;
+  status: 'Abierto' | 'Cerrado';
+  created_at: string;
+  user_id: number;
+  resolution?: string;
+  hour_resolution?: string;
+};
 
 const TicketList: React.FC = () => {
-  const [expandedTicket, setExpandedTicket] = useState<string | null>(null)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 5
-  const [userId, setUserId] = useState<number | null>(null)
-  const [tickets, setTickets] = useState<Ticket[]>([])
+  const [expandedTicket, setExpandedTicket] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const [tickets, setTickets] = useState<Ticket[]>([]);
 
   const toggleExpand = (ticketId: string) => {
-    setExpandedTicket(expandedTicket === ticketId ? null : ticketId)
-  }
+    setExpandedTicket(expandedTicket === ticketId ? null : ticketId);
+  };
 
   const getStatusColor = (status: Ticket['status']) => {
     switch (status) {
       case 'Abierto':
-        return 'bg-yellow-100 text-yellow-800'
+        return 'bg-yellow-100 text-yellow-800';
       case 'Cerrado':
-        return 'bg-green-100 text-green-800'
+        return 'bg-green-100 text-green-800';
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'bg-gray-100 text-gray-800';
     }
-  }
-
-  useEffect(() => {
-    async function fetchUserId() {
-      const token = localStorage.getItem('sessionToken')
-      if (!token) {
-        console.error('')
-        return
-      }
-
-      try {
-        const response = await fetch('/api/get-user-id', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ token }),
-        })
-
-        if (!response.ok) {
-          throw new Error('Error al obtener el user_id')
-        }
-
-        const result = await response.json()
-        setUserId(result.user_id)
-      } catch (error) {
-        console.error('Error:', error)
-      }
-    }
-
-    fetchUserId()
-  }, [])
+  };
 
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const response = await fetch('/api/tickets')
+        const response = await fetch('/api/tickets');
 
         if (!response.ok) {
-          throw new Error('Error al obtener los tickets')
+          throw new Error('Error al obtener los tickets');
         }
 
-        const result = await response.json()
-        setTickets(result)
+        const result = await response.json();
+        setTickets(result);
       } catch (error) {
-        console.error('Error:', error)
+        console.error('Error:', error);
       }
     }
 
-    fetchTickets()
-  }, [])
+    fetchTickets();
+  }, []);
 
   const filteredTickets = tickets.filter(ticket =>
     ticket.n_ticket.toLowerCase().includes(searchTerm.toLowerCase()) ||
     ticket.problema.toLowerCase().includes(searchTerm.toLowerCase()) ||
     ticket.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     ticket.area.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  );
 
-  const indexOfLastTicket = currentPage * itemsPerPage
-  const indexOfFirstTicket = indexOfLastTicket - itemsPerPage
-  const currentTickets = filteredTickets.slice(indexOfFirstTicket, indexOfLastTicket)
+  const indexOfLastTicket = currentPage * itemsPerPage;
+  const indexOfFirstTicket = indexOfLastTicket - itemsPerPage;
+  const currentTickets = filteredTickets.slice(indexOfFirstTicket, indexOfLastTicket);
 
-  const totalPages = Math.ceil(filteredTickets.length / itemsPerPage)
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+  const totalPages = Math.ceil(filteredTickets.length / itemsPerPage);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <div className="min-h-screen py-12">
@@ -214,7 +182,7 @@ const TicketList: React.FC = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TicketList
+export default TicketList;
