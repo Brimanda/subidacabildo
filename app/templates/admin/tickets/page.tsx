@@ -18,11 +18,10 @@ interface Ticket {
 export default function TicketsPage() {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
   const [resolution, setResolution] = useState('');
-  const [isEditingResolution, setIsEditingResolution] = useState(false);
+  const [setIsEditingResolution] = useState(false);
   const [isModalViewOpen, setIsModalViewOpen] = useState(false);
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
   const [isModalAddResolution, setIsModalAddResolution] = useState(false);
@@ -34,8 +33,6 @@ export default function TicketsPage() {
         if (!response.ok) throw new Error('Failed to fetch tickets');
         const data = await response.json();
         setTickets(data);
-      } catch (err) {
-        setError("Error al cargar los tickets");
       } finally {
         setIsLoading(false);
       }

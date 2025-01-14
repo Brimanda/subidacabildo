@@ -23,8 +23,6 @@ export default function UsersPage() {
                 if (!response.ok) throw new Error('Failed to fetch users');
                 const data = await response.json();
                 setUsers(data);
-            } catch (err) {
-                setError("Error al cargar los usuarios.");
             } finally {
                 setIsLoading(false);
             }

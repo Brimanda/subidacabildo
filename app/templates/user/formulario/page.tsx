@@ -10,7 +10,7 @@ const generateRandomTicketNumber = () => {
 }
 
 export default function Form() {
-  const [error, setError] = useState('');
+  const [setError] = useState('');
   const [formData, setFormData] = useState({
     name: "",
     area: "",
